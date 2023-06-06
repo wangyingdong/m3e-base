@@ -94,6 +94,8 @@ coming soon，我们正在准备中文文本嵌入模型评测 BenchMark MTEB-zh
 | SimCLUE              | 百科 | 775,593   | 平行语义          | 相似   | 良   | 数据集合，请在 simCLUE 中查看                                | 整合了中文领域绝大多数可用的开源的语义相似度和自然语言推理的数据集，并重新做了数据拆分和整理。 | 是                | 否       | 否   | 是   | https://github.com/CLUEbenchmark/SimCLUE                     | 是       |
 | Chinese-SQuAD        | 新闻 | 76,449    | 机器阅读理解      | 问答   | 优   | junzeng-pluto                                                | 中文机器阅读理解数据集，通过机器翻译加人工校正的方式从原始Squad转换而来 | 是                | 否       | 否   | 是   | https://github.com/pluto-junzeng/ChineseSquad                | 否       |
 
+## Case Study
+在T2Ranking上我们测试了M3E与其它中文Embedding模型的效果，输入query"请帮我找出边塞诗"，来返回5个最相似的结果，仅M3E-small就可以检索出类似于“大漠孤烟直,长河落日圆”的诗歌文本，而文本中是不存在“边塞”字样。在text2vec-base-chinese测试，全部返回不相关的内容。还有一些有趣的例子，例如输入query“你知道变形金钢吗”，可以检索出擎天柱，战斗机，汽车人，而“变形金刚”并不存在于文本之中。
 ## 计划表
 
 - [ ] 完成 MTEB 中文评测 BenchMark
@@ -111,3 +113,12 @@ coming soon，我们正在准备中文文本嵌入模型评测 BenchMark MTEB-zh
 ## License
 
 M3E models 使用的数据集中包括大量非商用的数据集，所以 M3E models 也是非商用的，仅供研究使用。不过我们已经在 M3E 数据集上标识了商用和非商用的数据集，您可以根据自己的需求自行训练。
+
+## Citation
+Please cite this model using the following format:
+@software{Moka Massive Mixed Embedding,
+  author = {Wang Yuxin,Sun Qingxuan,He sicheng},
+  title = {text2vec: A Tool for Text to Vector},
+  year = {2023}
+}
+
