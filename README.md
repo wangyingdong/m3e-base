@@ -1,5 +1,7 @@
 # M3E Models
 
+[m3e-small](https://huggingface.co/moka-ai/m3e-small) | [m3e-base](https://huggingface.co/moka-ai/m3e-base)
+
 M3E 是 Moka Massive Mixed Embedding 的缩写
 
 * Moka，此文本嵌入模型由 MokaAI 训练并开源，训练脚本使用 [uniem](https://github.com/wangyuxinwhy/uniem/blob/main/scripts/train_m3e.py)
@@ -56,7 +58,28 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 
 ## 评测
 
-coming soon，我们正在准备中文文本嵌入模型评测 BenchMark MTEB-zh，敬请期待
+### 文本分类
+
+- 数据集选择，选择开源在 HuggingFace 上的 6 种文本分类数据集，包括新闻、电商评论、股票评论、长文本等
+- 评测方式，使用 MTEB 的方式进行评测，报告 Accuracy。
+- 评测模型，[text2vec](https://github.com/shibing624/text2vec), m3e-base, m3e-small, openai-ada-002
+- 评测脚本，具体参考此 [评测脚本](https://github.com/wangyuxinwhy/uniem/blob/main/mteb-zh/tasks.py)
+
+|                   | text2vec | m3e-small | m3e-base |
+| ----------------- | -------- | --------- | -------- |
+| TNews             | 0.43     | 0.4443    | 0.4827   |
+| JDIphone          | 0.8214   | 0.8293    | 0.8533   |
+| GubaEastmony      | 0.7472   | 0.712     | 0.7621   |
+| TYQSentiment      | 0.6099   | 0.6596    | 0.7188   |
+| StockComSentiment | 0.4307   | 0.4291    | 0.4363   |
+| IFlyTek           | 0.414    | 0.4263    | 0.4409   |
+| Average           | 0.5755   | 0.5834    | 0.6157   |
+
+openai-ada-002 模型待评测
+
+### 检索排序
+
+更多任务，敬请期待
 
 ## M3E数据集
 
