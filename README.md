@@ -116,9 +116,10 @@ M3E models 使用的数据集中包括大量非商用的数据集，所以 M3E m
 
 ## Citation
 Please cite this model using the following format:
-@software{Moka Massive Mixed Embedding,
-  author = {Wang Yuxin,Sun Qingxuan,He sicheng},
-  title = {text2vec: A Tool for Text to Vector},
+```
+  @software {Moka Massive Mixed Embedding,  
+  author = {Wang Yuxin,Sun Qingxuan,He sicheng},  
+  title = {text2vec: A Tool for Text to Vector},  
   year = {2023}
-}
-
+  }
+```
