@@ -14,7 +14,7 @@ library_name: sentence-transformers
 
 M3E 是 Moka Massive Mixed Embedding 的缩写
 
-- Moka，此模型由 MokaAI 训练并开源，训练脚本使用 [uniem](https://github.com/wangyuxinwhy/uniem/blob/main/scripts/train_m3e.py)
+- Moka，此模型由 MokaAI 训练，开源和评测，训练脚本使用 [uniem](https://github.com/wangyuxinwhy/uniem/blob/main/scripts/train_m3e.py) ，评测 BenchMark 使用 [MTEB-zh](https://github.com/wangyuxinwhy/uniem/tree/main/mteb-zh)
 - Massive，此模型通过**千万级** (2200w+) 的中文句对数据集进行训练
 - Mixed，此模型支持中英双语的同质文本相似度计算，异质文本检索等功能，未来还会支持代码检索
 - Embedding，此模型是文本嵌入模型，可以将自然语言转换成稠密的向量
