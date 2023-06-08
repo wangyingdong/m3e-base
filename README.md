@@ -8,6 +8,11 @@ M3E 是 Moka Massive Mixed Embedding 的缩写
 * Massive，此文本嵌入模型通过**千万级**的中文句对数据集进行训练
 * Mixed，此文本嵌入模型支持中英双语的同质文本相似度计算，异质文本检索等功能，未来还会支持代码检索
 
+## 更新说明
+
+- 2023.06.08，添加检索任务的评测结果，在 T2Ranking 1W 中文数据集上，m3e-base 在 ndcg@10 上达到了 0.8004，超过了 openai-ada-002 的 0.7786
+- 2023.06.07，添加文本分类任务的评测结果，在 6 种文本分类数据集上，m3e-base 在 accuracy 上达到了 0.6157，超过了 openai-ada-002 的 0.5956
+
 ## 使用方式
 
 您需要先安装 sentence-transformers
@@ -58,12 +63,13 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 
 ## 评测
 
+- 评测模型，[text2vec](https://github.com/shibing624/text2vec), m3e-base, m3e-small, openai-ada-002
+- 评测脚本，具体参考此 [评测脚本](https://github.com/wangyuxinwhy/uniem/blob/main/mteb-zh)
+
 ### 文本分类
 
 - 数据集选择，选择开源在 HuggingFace 上的 6 种文本分类数据集，包括新闻、电商评论、股票评论、长文本等
 - 评测方式，使用 MTEB 的方式进行评测，报告 Accuracy。
-- 评测模型，[text2vec](https://github.com/shibing624/text2vec), m3e-base, m3e-small, openai-ada-002
-- 评测脚本，具体参考此 [评测脚本](https://github.com/wangyuxinwhy/uniem/blob/main/mteb-zh/tasks.py)
 
 |                   | text2vec | m3e-small | m3e-base | openai |
 | ----------------- | -------- | --------- | -------- | ------ |
@@ -77,7 +83,30 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 
 ### 检索排序
 
-更多任务，敬请期待
+#### T2Ranking 1W
+
+- 数据集选择，使用 [T2Ranking](https://github.com/THUIR/T2Ranking/tree/main) 数据集，由于 T2Ranking 的数据集太大，openai 评测起来的时间成本和 api 费用有些高，所以我们只选择了 T2Ranking 中的前 10000 篇文章
+- 评测方式，使用 MTEB 的方式进行评测，报告 map@1, map@10, mrr@1, mrr@10, ndcg@1, ndcg@10
+
+|         | text2vec | openai-ada-002 | m3e-small | m3e-base |
+| ------- | -------- | -------------- | --------- | -------- |
+| map@1   | 0.4684   | 0.6133         | 0.5574    | 0.626    |
+| map@10  | 0.5877   | 0.7423         | 0.6878    | 0.7656   |
+| mrr@1   | 0.5345   | 0.6931         | 0.6324    | 0.7047   |
+| mrr@10  | 0.6217   | 0.7668         | 0.712     | 0.7841   |
+| ndcg@1  | 0.5207   | 0.6764         | 0.6159    | 0.6881   |
+| ndcg@10 | 0.6346   | 0.7786         | 0.7262    | 0.8004   |
+
+#### T2Ranking
+
+- 数据集选择，使用 T2Ranking，刨除 openai-ada-002 模型后，我们对剩余的三个模型，进行 T2Ranking 10W 和 T2Ranking 50W 的评测。（T2Ranking 评测太耗内存了... 128G 都不行）
+- 评测方式，使用 MTEB 的方式进行评测，报告 ndcg@10
+
+|         | text2vec | m3e-small | m3e-base |
+| ------- | -------- | --------- | -------- |
+| t2r-1w  | 0.6346   | 0.72621   | 0.8004   |
+| t2r-10w | 0.44644  | 0.5251    | 0.6263   |
+| t2r-50w | 0.33482  | 0.38626   | 0.47364  |
 
 ## M3E数据集
 
