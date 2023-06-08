@@ -1,3 +1,12 @@
+---
+language: 
+  - zh
+  - en
+tags:
+- embedding
+- text-embedding
+---
+
 # M3E Models
 
 [m3e-small](https://huggingface.co/moka-ai/m3e-small) | [m3e-base](https://huggingface.co/moka-ai/m3e-base)
