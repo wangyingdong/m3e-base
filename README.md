@@ -96,7 +96,7 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 ## 评测
 
 - 评测模型，[text2vec](https://github.com/shibing624/text2vec), m3e-base, m3e-small, openai-ada-002
-- 评测脚本，具体参考此 [评测脚本](https://github.com/wangyuxinwhy/uniem/blob/main/mteb-zh)
+- 评测脚本，具体参考 [MTEB-zh] (https://github.com/wangyuxinwhy/uniem/blob/main/mteb-zh)
 
 ### 文本分类
 
@@ -105,12 +105,12 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 
 |                   | text2vec | m3e-small | m3e-base | openai |
 | ----------------- | -------- | --------- | -------- | ------ |
-| TNews             | 0.43     | 0.4443    | 0.4827   | 0.4594 |
-| JDIphone          | 0.8214   | 0.8293    | 0.8533   | 0.746  |
-| GubaEastmony      | 0.7472   | 0.712     | 0.7621   | 0.7574 |
-| TYQSentiment      | 0.6099   | 0.6596    | 0.7188   | 0.68   |
-| StockComSentiment | 0.4307   | 0.4291    | 0.4363   | 0.4819 |
-| IFlyTek           | 0.414    | 0.4263    | 0.4409   | 0.4486 |
+| TNews             | 0.43     | 0.4443    | **0.4827**   | 0.4594 |
+| JDIphone          | 0.8214   | 0.8293    | **0.8533**   | 0.746  |
+| GubaEastmony      | 0.7472   | 0.712     | **0.7621**   | 0.7574 |
+| TYQSentiment      | 0.6099   | 0.6596    | **0.7188**   | 0.68   |
+| StockComSentiment | 0.4307   | 0.4291    | 0.4363   | **0.4819** |
+| IFlyTek           | 0.414    | 0.4263    | 0.4409   | **0.4486** |
 | Average           | 0.5755   | 0.5834    | **0.6157**   | 0.5956 |
 
 ### 检索排序
