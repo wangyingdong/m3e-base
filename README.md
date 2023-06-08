@@ -1,10 +1,11 @@
 ---
-language: 
-  - zh
-  - en
+language:
+- zh
+- en
 tags:
-  - embedding
-  - text-embedding
+- embedding
+- text-embedding
+library_name: sentence-transformers
 ---
 
 # M3E Models
@@ -27,9 +28,9 @@ M3E 是 Moka Massive Mixed Embedding 的缩写
 |           | 参数数量 | 维度 | 中文 | 英文 | s2s | s2p | s2c | 开源 | 兼容性 | s2s Acc | s2p ndcg@10 |
 | --------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | ---- | ---------- | ------------ | -------- |
 | m3e-small | 24M      | 512      | 是       | 否       | 是       | 否       | 否       | 是   | 优         | 0.5755       | 0.7262   |
-| m3e-base  | 110M     | 768      | 是       | 是       | 是       | 否       | 否       | 是   | 优         | 0.5834       | 0.8004   |
+| m3e-base  | 110M     | 768      | 是       | 是       | 是       | 是       | 否       | 是   | 优         | 0.5834       | 0.8004   |
 | text2vec  | 110M     | 768      | 是       | 否       | 是       | 否       | 否       | 是   | 良         | 0.6157       | 0.6346   |
-| openai    | 未知     | 1576     | 是       | 是       | 是       | 否       | 是       | 否   | 优         | 0.5956       | 0.7786   |
+| openai    | 未知     | 1576     | 是       | 是       | 是       | 是       | 是       | 否   | 优         | 0.5956       | 0.7786   |
 
 说明：
 - s2s, 即 sentence to sentence ，代表了同质文本之间的嵌入能力，适用任务：文本相似度，重复问题检测，文本分类等
