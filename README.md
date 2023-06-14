@@ -21,6 +21,7 @@ M3E 是 Moka Massive Mixed Embedding 的缩写
 
 ## 更新说明
 
+- 2023.06.14，添加了三个中文开源文本嵌入模型到评测中，包括 UER, ErLangShen, DMetaSoul
 - 2023.06.08，添加检索任务的评测结果，在 T2Ranking 1W 中文数据集上，m3e-base 在 ndcg@10 上达到了 0.8004，超过了 openai-ada-002 的 0.7786
 - 2023.06.07，添加文本分类任务的评测结果，在 6 种文本分类数据集上，m3e-base 在 accuracy 上达到了 0.6157，超过了 openai-ada-002 的 0.5956
 
