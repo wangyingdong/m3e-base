@@ -45,6 +45,7 @@ Tips:
 - 使用场景主要是中文，少量英文的情况，建议使用 m3e 系列的模型
 - 多语言使用场景，并且不介意数据隐私的话，我建议使用 openai text-embedding-ada-002
 - 代码检索场景，推荐使用 openai text-embedding-ada-002
+- 文本检索场景，请使用具备文本检索能力的模型，只在 S2S 上训练的文本嵌入模型，没有办法完成文本检索任务
 
 ## 使用方式
 
@@ -120,6 +121,7 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 
 - 数据集选择，使用 [T2Ranking](https://github.com/THUIR/T2Ranking/tree/main) 数据集，由于 T2Ranking 的数据集太大，openai 评测起来的时间成本和 api 费用有些高，所以我们只选择了 T2Ranking 中的前 10000 篇文章
 - 评测方式，使用 MTEB 的方式进行评测，报告 map@1, map@10, mrr@1, mrr@10, ndcg@1, ndcg@10
+- 注意！从实验结果和训练方式来看，除了 M3E 模型和 openai 模型外，其余模型都没有做检索任务的训练，所以结果仅供参考。
 
 |         | text2vec | openai-ada-002 | m3e-small | m3e-base | DMetaSoul | uer     | erlangshen |
 | ------- | -------- | -------------- | --------- | -------- | --------- | ------- | ---------- |
