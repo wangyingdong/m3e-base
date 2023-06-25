@@ -8,7 +8,7 @@ tags:
 library_name: sentence-transformers
 ---
 
-# M3E Models
+# 🅜 M3E Models
 
 [m3e-small](https://huggingface.co/moka-ai/m3e-small) | [m3e-base](https://huggingface.co/moka-ai/m3e-base)
 
@@ -19,13 +19,16 @@ M3E 是 Moka Massive Mixed Embedding 的缩写
 - Mixed，此模型支持中英双语的同质文本相似度计算，异质文本检索等功能，未来还会支持代码检索
 - Embedding，此模型是文本嵌入模型，可以将自然语言转换成稠密的向量
 
-## 更新说明
+## 🆕 更新说明
 
+- 2023.06.24，添加微调 M3E 的教程 [notebook](https://github.com/wangyuxinwhy/uniem/blob/main/examples/finetune.ipynb)，几行代码，更佳适配！<a target="_blank" href="https://colab.research.google.com/github/wangyuxinwhy/uniem/blob/main/examples/finetune.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 - 2023.06.14，添加了三个中文开源文本嵌入模型到评测中，包括 UER, ErLangShen, DMetaSoul
 - 2023.06.08，添加检索任务的评测结果，在 T2Ranking 1W 中文数据集上，m3e-base 在 ndcg@10 上达到了 0.8004，超过了 openai-ada-002 的 0.7786
 - 2023.06.07，添加文本分类任务的评测结果，在 6 种文本分类数据集上，m3e-base 在 accuracy 上达到了 0.6157，超过了 openai-ada-002 的 0.5956
 
-## 模型对比
+## ⚖️ 模型对比
 
 |           | 参数数量 | 维度 | 中文 | 英文 | s2s | s2p | s2c | 开源 | 兼容性 | s2s Acc | s2p ndcg@10 |
 | --------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | ---- | ---------- | ------------ | -------- |
@@ -47,7 +50,7 @@ Tips:
 - 代码检索场景，推荐使用 openai text-embedding-ada-002
 - 文本检索场景，请使用具备文本检索能力的模型，只在 S2S 上训练的文本嵌入模型，没有办法完成文本检索任务
 
-## 使用方式
+## 🔧 使用 M3E
 
 您需要先安装 sentence-transformers
 
@@ -82,12 +85,30 @@ for sentence, embedding in zip(sentences, embeddings):
 
 M3E 系列的所有模型在设计的时候就考虑到完全兼容 [sentence-transformers](https://www.sbert.net/) ，所以你可以通过**替换名称字符串**的方式在所有支持 sentence-transformers 的项目中**无缝**使用 M3E Models，比如 [chroma](https://docs.trychroma.com/getting-started), [guidance](https://github.com/microsoft/guidance), [semantic-kernel](https://github.com/microsoft/semantic-kernel) 。
 
+## 🎨 微调模型
 
-## 训练方案
+`uniem` 提供了非常易用的 finetune 接口，几行代码，即刻适配！
+
+```python
+from datasets import load_dataset
+
+from uniem.finetuner import FineTuner
+
+dataset = load_dataset('shibing624/nli_zh', 'STS-B')
+# 指定训练的模型为 m3e-small
+finetuner = FineTuner('moka-ai/m3e-small', dataset=dataset)
+finetuner.run(epochs=1)
+```
+
+微调的模型详见 [uniem 微调教程](https://github.com/wangyuxinwhy/uniem/blob/main/examples/finetune.ipynb) or <a target="_blank" href="https://colab.research.google.com/github/wangyuxinwhy/uniem/blob/main/examples/finetune.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+## ➿ 训练方案
 
 M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训练，为了保证 in-batch 负采样的效果，我们使用 A100 80G 来最大化 batch-size，并在共计 2200W+ 的句对数据集上训练了 1 epoch。训练脚本使用 [uniem](https://github.com/wangyuxinwhy/uniem/blob/main/scripts/train_m3e.py)，您可以在这里查看具体细节。
 
-## 特性
+## 🌟 特性
 
 - 中文训练集，M3E 在大规模句对数据集上的训练，包含中文百科，金融，医疗，法律，新闻，学术等多个领域共计 2200W 句对样本，数据集详见 [M3E 数据集](#M3E数据集)
 - 英文训练集，M3E 使用 MEDI 145W 英文三元组数据集进行训练，数据集详见 [MEDI 数据集](https://drive.google.com/file/d/1vZ5c2oJNonGOvXzppNg5mHz24O6jcc52/view)，此数据集由 [instructor team](https://github.com/HKUNLP/instructor-embedding) 提供
@@ -95,7 +116,7 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 - 基础模型，M3E 使用 hfl 实验室的 [Roberta](https://huggingface.co/hfl/chinese-roberta-wwm-ext) 系列模型进行训练，目前提供  small 和  base 两个版本，大家则需选用
 - ALL IN ONE，M3E 旨在提供一个 ALL IN ONE 的文本嵌入模型，不仅支持同质句子相似度判断，还支持异质文本检索，你只需要一个模型就可以覆盖全部的应用场景，未来还会支持代码检索
 
-## 评测
+## 💯 MTEB-zh 评测
 
 - 评测模型，[text2vec](https://github.com/shibing624/text2vec), m3e-base, m3e-small, openai text-embedding-ada-002, [DMetaSoul](https://huggingface.co/DMetaSoul/sbert-chinese-general-v2), [UER](https://huggingface.co/uer/sbert-base-chinese-nli), [ErLangShen](https://huggingface.co/IDEA-CCNL/Erlangshen-SimCSE-110M-Chinese)
 - 评测脚本，具体参考 [MTEB-zh] (https://github.com/wangyuxinwhy/uniem/blob/main/mteb-zh)
@@ -146,7 +167,7 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 说明：
 - 检索排序对于 text2vec 并不公平，因为 text2vec 在训练的时候没有使用过检索相关的数据集，所以没有办法很好的完成检索任务也是正常的。
 
-## M3E数据集
+## 📂 M3E数据集
 
 如果您想要使用这些数据集，你可以在 [uniem process_zh_datasets](https://github.com/wangyuxinwhy/uniem/blob/main/scripts/process_zh_datasets.py) 中找到加载 huggingface 数据集的脚本，非 huggingface 数据集需要您根据下方提供的链接自行下载和处理。
 
@@ -182,7 +203,7 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 | SimCLUE              | 百科 | 775,593   | 平行语义          | 相似   | 良   | 数据集合，请在 simCLUE 中查看                                | 整合了中文领域绝大多数可用的开源的语义相似度和自然语言推理的数据集，并重新做了数据拆分和整理。 | 是                | 否       | 否   | 是   | https://github.com/CLUEbenchmark/SimCLUE                     | 是       |
 | Chinese-SQuAD        | 新闻 | 76,449    | 机器阅读理解      | 问答   | 优   | junzeng-pluto                                                | 中文机器阅读理解数据集，通过机器翻译加人工校正的方式从原始Squad转换而来 | 是                | 否       | 否   | 是   | https://github.com/pluto-junzeng/ChineseSquad                | 否       |
 
-## 计划表
+## 🗓️ 计划表
 
 - [x] 完成 MTEB 中文评测 BenchMark, [MTEB-zh](https://github.com/wangyuxinwhy/uniem/tree/main/mteb-zh)
 - [ ] 完成 Large 模型的训练和开源
@@ -192,11 +213,11 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 - [ ] 在 m3e-hq-with-score 上通过 [cosent loss](https://github.com/wangyuxinwhy/uniem/blob/main/uniem/criteria.py#LL24C39-L24C39) loss 进行训练并开源模型，CoSent 原理参考这篇[博客](https://kexue.fm/archives/8847)
 - [ ] 开源商用版本的 M3E models
 
-## 致谢
+## 🙏 致谢
 
 感谢开源社区提供的中文语料，感谢所有在此工作中提供帮助的人们，希望中文社区越来越好，共勉！
 
-## License
+## 📜 License
 
 M3E models 使用的数据集中包括大量非商用的数据集，所以 M3E models 也是非商用的，仅供研究使用。不过我们已经在 M3E 数据集上标识了商用和非商用的数据集，您可以根据自己的需求自行训练。
 
