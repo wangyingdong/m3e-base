@@ -208,7 +208,8 @@ M3E 使用 in-batch 负采样的对比学习的方式在句对数据集进行训
 ## 🗓️ 计划表
 
 - [x] 完成 MTEB 中文评测 BenchMark, [MTEB-zh](https://github.com/wangyuxinwhy/uniem/tree/main/mteb-zh)
-- [ ] 完成 Large 模型的训练和开源
+- [x] 完成 Large 模型的训练和开源
+- [x] 完成 Finetuner ，允许更优雅的微调
 - [ ] 完成支持代码检索的模型
 - [ ] 对 M3E 数据集进行清洗，保留高质量的部分，组成 m3e-hq，并在 huggingface 上开源
 - [ ] 在 m3e-hq 的数据集上补充 hard negative 的样本及相似度分数，组成 m3e-hq-with-score，并在 huggingface 上开源
